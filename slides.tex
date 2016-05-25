@@ -1,5 +1,10 @@
 \documentclass[10pt]{beamer}
 
+% Watch out for lines like
+%% Mat kicks in
+%% Luca kicks in
+% in order to know which slides belong to whom
+
 % Handout Generation {{{
 
 % \documentclass[10pt,handout]{beamer}
@@ -44,12 +49,15 @@
 \setbeamercolor{title separator}{fg=KTHBlue}
 
 \AtBeginSubsection{\frame{\subsectionpage}}
+
+%% Luca kicks in
+
 % Title Page {{{1
 
-\title{Coding Best Practices \& Tools}
-\subtitle{Towards painless maintable programming for researchers}
-\date{MWL Lunch Seminar -- June 2016}
+\title{Coding: Best Practices \& Tools}
+\subtitle{Towards painless programming for researchers}
 \author{L. \textsc{Manzari} -- M. \textsc{Gaborit}}
+\date{MWL Lunch Seminar -- June 1, 2016}
 \institute{}
 \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo}}
 
@@ -88,19 +96,28 @@
 	\tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{Better coding practices ?} % {{{1
+\section{Better practices in coding: why?} % {{{1
 
-\begin{frame}{From research to industry}
-	TODO
+\begin{frame}{Better practices in coding: why?}
+
+	\begin{quotation}
+		Instead of imagining that our main task is to instruct a
+		computer what to do, let us concentrate rather on explaining to human
+		beings what we want a computer to do.
+	\end{quotation}
+	\begin{flushright}
+		--- D. Knuth
+	\end{flushright}
+
 \end{frame}
 
-\section{Editors \& IDE} % {{{1
+\section{Editors \& IDEs} % {{{1
 
-\begin{frame}{Filetypes in research} % {{{2
+\begin{frame}{File types in research} % {{{2
 
 	\begin{center}
 		\begin{tikzpicture}
-			\foreach \type [count=\i] in {data,config,{\LaTeX{} Report},code}{
+			\foreach \type [count=\i] in {data,config,{\LaTeX{}},code}{
 				\pause
 				\fileimage{2.5*\i,0};
 				\node (tmp) at (2.5*\i+1,-1) {\type};
@@ -111,41 +128,74 @@
 
 		\uncover<6,7>{
 			\Large
-			All are \alert{text files}...
+			These are all \alert{text files}...
 		}
 
 		\uncover<7>{
-			$\Rightarrow$ Need a good editor !
+			...let's use \alert{a good text editor}!
 		}
 	\end{center}
 \end{frame}
 
-\begin{frame}{What is a good editor ?} % {{{2
-	\begin{itemize}
-		\item Focuses on editing and file content
-		\item Eases writing (code completion, syntax highlighting, \textit{etc.})
-		\item Syntaxic checking
-		\item Customizable \& Extensible
-	\end{itemize}
+\begin{frame}{What makes a text editor \emph{good}?} % {{{2
 
-	\pause{}
-	\begin{block}{Plugins done right} % {{{2
-		Always prefer a simple editor and a few, carefuly chosen, plugins to a all-doing
-		overcomplicated software.
-	\end{block}
+	\Large
+	A good text editor is...
+		\begin{itemize}
+			\item Invisible
+			\item Intelligent
+			\item Customizable
+			\item Extensible
+		\end{itemize}
 
-	\pause
-	\begin{block}{Plugins done right (UNIX Version)}
-		It does only one thing but it does it perfectly.
-	\end{block}
 \end{frame}
 
-\begin{frame}[t]{Editors : VIm} % {{{2
+\begin{frame}{All the fuss about VIm and GNU Emacs} % {{{2
+
+	\Large
+	\begin{description}
+		\item[Pros]
+			\begin{itemize}
+				\item learn once, use forever
+				\item available everywhere
+				\item (im)proved with time
+			\end{itemize}
+		\item[Cons]
+			\begin{itemize}
+				\item at the beginning, intimidating
+			\end{itemize}
+	\end{description}
+
+\end{frame}
+
+\begin{frame}[t]{Editors: GNU Emacs} % {{{2
+	\Large
+	\begin{block}{Characteristics}
+		\begin{itemize}
+			\item It's not a text editor, it's a Lisp interpreter
+			\item Highly context-dependent behavior
+		\end{itemize}
+	\end{block}
+	\uncover<2>{
+			\begin{block}{How to get started}
+				\begin{enumerate}
+					\item use it as a regular text editor
+					\item customize according to need
+					\item extend it using packages
+				\end{enumerate}
+			\end{block}
+	}
+
+\end{frame}
+
+%% Mat kicks in
+
+\begin{frame}[t]{Editors: VIm} % {{{2
 	\only<1>{
 		\begin{block}{What people think it is...}
 			\begin{center}
 			\includegraphics[width=.9\textwidth]{images/vim/people_think.png}
-		\end{center}
+			\end{center}
 		\end{block}
 	}
 	\only<2>{
@@ -176,16 +226,23 @@
 	}
 \end{frame}
 
-\begin{frame}[t]{Editor : Emacs} % {{{2
- 	TODO
-\end{frame}
 
-\begin{frame}[t]{Editor : SublimeText, Atom, Light Table} % {{{2
-	TODO
+\begin{frame}[t]{Editors: for the fainthearted} % {{{2
+	\Large
+	Multi-platform, open-source and actively maintained
+
+	\\~\\
+
+	\begin{itemize}
+		\item \textbf{Atom} \hfill \url{atom.io}
+		\item \textbf{Light Table} \hfill \url{lighttable.com}
+		\item \textbf{Sublime Text} \hfill \url{sublimetext.com}
+	  \end{itemize}
+
 \end{frame}
 % }}}
 
-\section{Versionning for fun and profit} % {{{1
+\section{Versioning for fun and profit} % {{{1
 
 \begin{frame}[t]{Contribution to a research code} % {{{2
 	\begin{center}
@@ -253,24 +310,24 @@
 \end{frame}
 
 % }}}
-\begin{frame}{Versionning} % {{{2
+\begin{frame}{Versioning} % {{{2
 	\begin{center}
-		\only<1>{We need to \textbf{\alert{collaborate on}} files every single day.}
-		\only<2>{We need to \textbf{\alert{share}} files every single day.}
-		\only<3>{We need to \textbf{\alert{run tests on}} files every single day.}
-		\only<4>{We need to \textbf{\alert{review}} files every single day.}
-		\only<5>{We need to \textbf{\alert{explore}} files every single day.}
+		\only<1>{We need to \textbf{\alert{edit}} files every single day.}
+		\only<2>{We need to \textbf{\alert{collaborate on}} files every single day.}
+		\only<3>{We need to \textbf{\alert{review}} files every single day.}
+		\only<4>{We need to \textbf{\alert{explore}} files every single day.}
+		\only<5>{We need to \textbf{\alert{share}} files every single day.}
 
-		\only<6>{\Large{Versionning is the way to go !}}
+		\only<6>{\Large{We need a reliable versioning system!}}
 	\end{center}
 \end{frame}
 
 % }}}
 
-\subsection{The old old way : names, zip, mail} % {{{2
+\subsection{The old old way : name it, zip it, mail it} % {{{2
 
-\begin{frame}{Versionning : the old old way} % {{{3
-	The first versioning attempt relies on 3 pilars :
+\begin{frame}{Versioning: the old old way} % {{{3
+	The first versioning attempts traditionally rely on 3 pillars :
 
 	\begin{itemize}
 		\item Naming conventions
@@ -278,19 +335,11 @@
 		\item Careful data management
 	\end{itemize}
 
-	But doesn't behave well when scaling...
+	  {\alert{\Large{``C'mon, I even mailed myself the latest version: how can this go wrong?''}}}
 
-	\begin{itemize}
-		\item Team work complicated
-		\item Modification conflicts
-		\item No continuous time travel
-		\item \textit{etc.}
-	\end{itemize}
-
-	Some are even inventive and use different mail accounts to backup projects...
 \end{frame}
 
-\begin{frame}{Versionning : the old old way} % {{{3
+\begin{frame}{Versioning: the old old way} % {{{3
 
 	\begin{center}
 		\begin{tikzpicture}[scale=1]
@@ -313,30 +362,47 @@
 	\end{center}
 \end{frame}
 
+\begin{frame}{Versioning: the old way} % {{{3
+
+	Plus, this does not behave well when scaling things up...
+
+	\begin{itemize}
+		\item How to handle team-work?
+		\item Modification conflicts: what to do?
+		\item No continuous time travel
+		\item ...and a lot more issues
+	\end{itemize}
+
+\end{frame}
+
+
 \subsection{The new old way : \{Drop,\}Box and Changelogs} % {{{2
 
-\begin{frame}{Versioning : the new old way} % {{{3
-	One more step towards real-time collaboration... using Dropbox \& others...
+\begin{frame}{Versioning: the new old way} % {{{3
+
+	The Cloud: one more step towards real-time collaboration!
 
 	\begin{itemize}
 		\item Free \& paid plans
 		\item Auto-sync even for big files
 		\item Team notifications
 		\item Mobile access to files
+		\item A carefully maintained changelog \emph{may} keep track of changes
 	\end{itemize}
 
-	Possibility to track changes if a change-log is carefully maintained.
+	\pause
+	But...
+	\pause
+	does The Cloud really share the spirit that drives research?
 
-	\pause{}
-
-	But... is it really compliant with research prerequisites ?
 \end{frame}
 
-\begin{frame}{Terms of Service : Chosen moments} % {{{3
+\begin{frame}{Terms of Service: Chosen moments} % {{{3
 
 	\only<1>{
 		\begin{quotation}
-			These and other features may require our systems to access, store and scan Your Stuff.
+			These and other features may require our systems
+			to \textbf{access, store and scan} Your Stuff.
 		\begin{flushright}
 			--- DropBox TOS
 		\end{flushright}
@@ -344,23 +410,29 @@
 	}
 	\only<2>{
 		\begin{quotation}
-			You hereby grant Box and its contractors the right to transmit, use and disclose
-			Content posted on the Service solely to the extent necessary to provide the Service,
-			as otherwise permitted by these Terms, or to comply with any request of a
-			governmental or regulatory body (including subpoenas or court orders)
+			You hereby grant Box and its contractors the
+			right to \textbf{transmit, use and disclose}
+			Content posted on the Service solely to the
+			extent necessary to provide the Service, as
+			otherwise permitted by these Terms, or to
+			\textbf{comply with any request} of a
+			governmental or regulatory body (including
+			subpoenas or court orders)
 		\begin{flushright}
 			--- Box TOS
 		\end{flushright}
 		\end{quotation}
 	}
 	\only<4>{
-		What about iCloud ?
+		What about iCloud?
 
 		\begin{quotation}
-			Apple reserves the right at all times to determine whether Content is appropriate
-			and in compliance with this Agreement, and may pre-screen, move, refuse, modify
-			and/or remove Content at any time, without prior notice and in its sole discretion
-			[\ldots]
+			Apple reserves the right at all times to
+			determine whether Content is appropriate and in
+			compliance with this Agreement, and may
+			pre-screen, \textbf{move, refuse, modify and/or
+				remove} Content at any time, without
+			prior notice and in its sole discretion [\ldots]
 		\begin{flushright}
 			--- iCloud TOS
 		\end{flushright}
@@ -368,15 +440,21 @@
 
 	}
 	\only<5>{
-		What about iCloud ?
+		What about iCloud?
 
 		\begin{quotation}
-			However, by submitting or posting such Content on areas of the Service that are
-			accessible by the public or other users with whom you consent to share such Content,
-			you grant Apple a worldwide, royalty-free, non-exclusive license to use, distribute,
-			reproduce, modify, adapt, publish, translate, publicly perform and publicly display
-			such Content on the Service solely for the purpose for which such Content was
-			submitted or made available, without any compensation or obligation to you.
+			However, by submitting or posting such Content
+			on areas of the Service that are accessible by
+			the public or other users with whom you consent
+			to share such Content, you grant Apple a
+			worldwide, royalty-free, non-exclusive license
+			to \textbf{use, distribute, reproduce, modify,
+				adapt, publish, translate, publicly
+				perform and publicly display} such
+			Content on the Service solely for the purpose
+			for which such Content was submitted or made
+			available, without any compensation or
+			obligation to you.
 		\begin{flushright}
 			--- iCloud TOS
 		\end{flushright}
@@ -385,10 +463,15 @@
 
 	\only<3>{
 		\begin{quotation}
-			When you upload, submit, store, send or receive content to or through our Services,
-			you give Google (and those we work with) a worldwide license to use, host, store,
-			reproduce, modify, create derivative works, communicate, publish, publicly perform, publicly display and distribute
-			such content. [...] This license continues even if you stop using our Services [...]
+			When you upload, submit, store, send or receive
+			content to or through our Services, you give
+			Google (and those we work with) a worldwide
+			license to \textbf{use, host, store, reproduce,
+				modify, create derivative works,
+				communicate, publish, publicly perform,
+				publicly display and distribute} such
+			content. [...] This license continues even if
+			you stop using our Services [...]
 		\begin{flushright}
 			--- Google TOS
 		\end{flushright}
@@ -396,17 +479,17 @@
 	}
 \end{frame}
 
-\subsection{The badass way : \giticon} % {{{2
+\subsection{The badass way: \giticon} % {{{2
 
-	\begin{frame}{Versioning : the badass way} % {{{3
+	\begin{frame}{Versioning: the badass way} % {{{3
 
-		\giticon was built to handle huge project (Linux Vanilla Kernel) :
+		\giticon was built to handle huge projects, like the Linux kernel:
 
 		\begin{itemize}
 			\item distributed (everyone has a full copy)
-			\item efficient (only changes are transfered)
+			\item efficient (only changes are transferred)
 			\item commit-wise versioning
-			\item supporting branches (new ideas in a enclosed space) and tagging (this version is working !)
+			\item supporting branches (new ideas in a enclosed space) and tagging
 			\item potentially server-less \& self-hostable
 			\item simultaneous modifications \& smart merging
 			\item usable through GUI (tig, gitk, tortoise-git \& others) or command-line
@@ -414,7 +497,7 @@
 
 	\end{frame}
 
-	\begin{frame}{Versioning : the badass way} % {{{3
+	\begin{frame}{Versioning: the badass way} % {{{3
 
 		Concerning commits...
 
@@ -453,11 +536,11 @@
 				}
 			\end{tikzpicture}
 
-			All the needed information is here !
+			All the needed information is here!
 		\end{center}
 	\end{frame}
 
-	\begin{frame}{Versioning : the badass way} % {{{
+	\begin{frame}{Versioning: the badass way} % {{{
 		Collaboration-centric workflow
 
 		\begin{center}
@@ -483,7 +566,7 @@
 		\end{center}
 	\end{frame}
 
-	\begin{frame}{Versioning : the badass way} % {{{3
+	\begin{frame}{Versioning: the badass way} % {{{3
 
 		\begin{center}
 			\begin{tikzpicture}[scale=1.2, transform shape]
@@ -521,7 +604,7 @@
 				}
 				\uncover<4>{
 					\draw[KTHBlue, thick] (2.3,-.5) rectangle (4.7,-1.5);
-					\node[KTHBlue] (cancelled_branch) at (3.55,-1.6) {\textbf{\scriptsize{Abandonned Idea}} };
+					\node[KTHBlue] (cancelled_branch) at (3.55,-1.6) {\textbf{\scriptsize{Abandoned Idea}} };
 				}
 				\uncover<5>{
 					\draw[KTHBlue, dashed, thick, ->] (6.8,-.2) .. controls ++(-.5,-.5) and ++(.5,-.5) ..
@@ -535,7 +618,7 @@
 					\draw[KTHBlue, ->, thick] (5+.2,-1) -- ++(.6,0);
 					\draw[KTHBlue, ->, thick] (4.2,0) .. controls ++(.5,0) and ++(-.5,0) .. (4.8,-1);
 
-					\node[KTHBlue] (branching) at (5.5,-1.3) {\textbf{\scriptsize{Even to spawn a branch !}} };
+					\node[KTHBlue] (branching) at (5.5,-1.3) {\textbf{\scriptsize{Even to spawn a branch!}} };
 				}
 			\end{tikzpicture}
 		\end{center}
@@ -544,6 +627,9 @@
 	% }}}
 
 % }}}
+
+%% Luca kicks in
+
 \section{Documentation is not a myth} % {{{1
 
 \begin{frame}{WTFM} % {{{
@@ -568,7 +654,7 @@
 	}
 \end{frame}
 
-\begin{frame}{Documentation : right in the code} % {{{
+\begin{frame}{Documentation: right in the code} % {{{
 	Nobody has \textbf{time} to write documentation...
 
 	but everybody can include comments in the code !
@@ -576,7 +662,7 @@
 	\pause
 	\medskip
 
-	\begin{block}{Differents comments for different things}
+	\begin{block}{Different comments for different things}
 		\begin{description}
 			\item[File] What it does ? Bib. references ?
 			\item[Function] How is the task done ? How to use it ?
@@ -595,7 +681,7 @@
 
 \end{frame}
 
-\begin{frame}{Documentation : Variables naming matters} % {{{
+\begin{frame}{Documentation: Variables naming matters} % {{{
 
 	\begin{quotation}
 		\noindent A computer program is just another way to express an idea.
@@ -616,12 +702,12 @@
 		Formalized naming conventions exists (and some also address code styling issues, see
 		PEP8 for example).
 
-		Use them as much as you can !
+		Use them as much as you can!
 	\end{block}
 
 \end{frame}
 
-\begin{frame}{Documentation : re-generated}
+\begin{frame}{Documentation: re-generated}
 
 	\begin{quotation}
 		When a task is repetitive... build a machine to do it.
@@ -634,24 +720,26 @@
 	\begin{description}
 		\item[Doxygen] Doc-generator for C/C++/Java \& others
 		\item[Sphinx] Doc-oriented static site generator build for the Python project (docutils) with EPUB, PDF, \LaTeX{} capabilities
-		\item[publish()] HTML/PDF publishing tool included in MATLab
+		\item[publish()] HTML/PDF publishing tool included in MATLAB
 		\item[\textit{etc.}]
 	\end{description}
 
 	It's easy to publish it too : see \textbf{readthedocs.org}
 \end{frame}
 
-\section{What's next ?} % {{{1
+%% Mat kicks in
 
-\begin{frame}{Cutted scenes}
-		We couldn't fit it all in... so here is the rest :
+\section{What's next?} % {{{1
+
+\begin{frame}{Cut scenes}
+		We couldn't fit it all in... so here is the rest:
 
 		\begin{description}
 			\item[Github] Public Git server for free software (paid plans exist)
 				with webpage publishing service (good to host the homepage of a project).
 			\item[Agility] Project management methods centered on human relations more than on
 				tools and processes. See Kanban or Scrum for an introduction.
-			\item[TDD \& BDD] Test- \& Behaviour Driven Development. Coding paradigms focusing
+			\item[TDD \& BDD] Test- \& Behavior Driven Development. Coding paradigms focusing
 				on certain aspects (reliability \& spec. compliance). Useful to scale from a
 				research PoC to a distributed software.
 		\end{description}
@@ -659,9 +747,9 @@
 
 
 \begin{frame}[standout] % Thank you {{{1
-	Thank you !\\
+	Thank you!\\
 	\vspace{0.05\textwidth}
-	Questions ?\\
+	Questions?\\
 	\vspace{0.25\textwidth}
 	\scriptsize{\texttt{manzari@kth.se}} --- \scriptsize{\texttt{gaborit@kth.se}}\\
 \end{frame}
