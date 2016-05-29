@@ -27,6 +27,8 @@
 \newfontfamily{\FA}{FontAwesome}
 
 \definecolor{KTHBlue}{HTML}{003C9E}
+\definecolor{DarkGreen}{HTML}{526B0B}
+\definecolor{DarkRed}{HTML}{AB2511}
 
 % Theming {{{1
 \usetheme[progressbar=foot]{metropolis}
@@ -514,8 +516,8 @@
 				\draw (0,4) -- ++(4,0);
 				\node[anchor=west] (tmp) at (.2,4.25) {\scriptsize{Dec. 25 2015 21:42:21}};
 				\draw (0,2) -- ++(4,0);
-				\foreach \sign/\col [count=\i] in { +/green, +/green, -/red, -/red, +/green, -/red, -/red} {
-					\node[anchor=west, color=\col] (tmp) at (.2,2+.25*\i) {\scriptsize{\texttt{\sign}} };
+				\foreach \sign/\col [count=\i] in { +/DarkGreen, +/DarkGreen, -/DarkRed, -/DarkRed, +/DarkGreen, -/DarkRed, -/DarkRed} {
+					\node[anchor=west, color=\col] (tmp) at (.2,2+.25*\i) {\textbf{\small{\texttt{\sign}} }};
 				}
 				\foreach \mode [count=\i] in { file doc.tex, new file mode 10644, file stuff.sh, old mode 100644,  new mode 100755 } {
 					\node[anchor=west] (tmp) at (.2,2-.3*\i) {\scriptsize{\texttt{\mode}} };
