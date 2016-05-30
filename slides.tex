@@ -25,6 +25,7 @@
 \usepackage{fontspec}
 \usepackage{fontawesome}
 \newfontfamily{\FA}{FontAwesome}
+\usepackage{verbatim}
 
 \definecolor{KTHBlue}{HTML}{003C9E}
 \definecolor{DarkGreen}{HTML}{526B0B}
@@ -119,11 +120,11 @@
 
 	\begin{center}
 		\begin{tikzpicture}
-			\foreach \type [count=\i] in {data,config,{\LaTeX{}},code}{
+			\foreach \t/\e [count=\i] in {data/.csv,config/.cfg,\LaTeX{}/.tex,code/.m}{
 				\pause
 				\fileimage{2.5*\i,0};
-				\node (tmp) at (2.5*\i+1,-1) {\type};
-				\node (tmp) at (2.5*\i+1,1) {\textbf{\texttt{.txt}} };
+				\node (tmp) at (2.5*\i+1,-1) {\t};
+				\node (tmp) at (2.5*\i+1,1) {\textbf{\texttt{\e}} };
 			}
 		\end{tikzpicture}
 		\pause{}
@@ -144,7 +145,7 @@
 	\large
 	A good text editor has to be...
 		\begin{itemize}
-			\item Transparent
+			\item Invisible
 			\item Intelligent
 			\item Customizable
 			\item Extensible
@@ -196,7 +197,7 @@
 	\only<1>{
 		\begin{block}{What people think it is...}
 			\begin{center}
-			\includegraphics[width=.9\textwidth]{images/vim/people_think.png}
+				\includegraphics[width=.9\textwidth]{images/vim/people_think.png}
 			\end{center}
 		\end{block}
 	}
@@ -211,7 +212,7 @@
 		\begin{block}{Characteristics}
 			\begin{itemize}
 				\item Command line or GUI
-				\item Modal (one mode per class of action : edition, displacement, selection, etc...)
+				\item Modal (one mode per class of action: edition, displacement, selection, etc...)
 				\item Based on shortcuts and commands
 				\item Fully customizable through plugin or embedded language
 				\item Painless integration with any standard UNIX toolchain
@@ -328,7 +329,7 @@
 \subsection{The old old way : name it, zip it, mail it} % {{{2
 
 \begin{frame}{Versioning: the old old way} % {{{3
-	The first versioning attempts traditionally rely on 3 pillars :
+	The first versioning attempts traditionally rely on 3 pillars:
 
 	\begin{itemize}
 		\item Naming conventions
@@ -628,101 +629,172 @@
 
 %% Luca kicks in
 
-\section{Documentation is not a myth} % {{{1
+\section{Documentation} % {{{1
 
-\begin{frame}{WTFM} % {{{
+\begin{frame}{Documentation} % {{{
 	\begin{center}
-		\begin{tikzpicture}
-			\node (tmp) at (0,0) {\Large{Write The Fucking Manual}};
-			\uncover<2,3>{
-				\node[rotate=20, red] (tmp) at (.2,0) {\Huge{\textbf{Full}} };
-			}
-		\end{tikzpicture}
+		\includegraphics[height=.85\textheight]{images/docs/rtfm.png}
 	\end{center}
-
-	\uncover<3>{
-		Reasons ? Really ?
-
-		\begin{itemize}
-			\item Be able to reuse the code later (even after years)
-			\item Be able to share without a full training for the receiver
-			\item Allow reviewing \& understanding the code
-			\item Publish the code (y'know for reproductibility...)
-		\end{itemize}
-	}
+	{\tiny Courtesy of Randall Munroe, https://xkcd.com/293}
 \end{frame}
 
-\begin{frame}{Documentation: right in the code} % {{{
-	Nobody has \textbf{time} to write documentation...
+\begin{frame}[t]{Documentation: why} % {{{
 
-	but everybody can include comments in the code !
+	\Large
+	Before using a program, it's good to know:
 
-	\pause
-	\medskip
+	\begin{description}
+	      \item [what] it does
+	      \item [how] it does it
+	      \item [why] it does it like that
+	\end{description}
 
-	\begin{block}{Different comments for different things}
+	\\~\\
+
+	\uncover<2>{
+	Code tells you \textbf{how}.
+
+	Documentation tells you the rest.
+	}
+
+\end{frame}
+
+\begin{frame}[t]{Documentation} % {{{
+
+	\LARGE
+	\begin{block}{Internal}
+		\begin{itemize}
+		      \item comments
+		      \item self-documenting code
+		\end{itemize}
+	\end{block}
+	\begin{block}{External}
+		\begin{itemize}
+		      \item separate manual
+		      \item referenced material
+		\end{itemize}
+	\end{block}
+
+
+\end{frame}
+
+\begin{frame}[t,fragile]{Documentation: internal: comments} % {{{
+
+	\begin{block}{Begin every file with a comment}
+		\begin{itemize}
+		      \item say what the code should do
+		      \item describe how to use the file
+		\end{itemize}
+	\end{block}
+
+	\begin{block}{A MATLAB example}
+\begin{verbatim}
+function [h,a] = pythagoras(c1,c2)
+% pythagoras -- computes the hypotenuse and the area of a
+%		right-angled triangle
+%
+% Inputs: c1 - length of the first cathetus [m]
+%	  c2 - length of the second cathetus [m]
+% Outputs: h - length of the hypotenuse [m]
+%	   a - area of the triangle [m^2]
+%
+% Example: [hypo,area] = pythagoras(3,4)
+\end{verbatim}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Documentation: internal: comments} % {{{
+	\Huge
+	\begin{itemize}
+		\item Explain \textbf{why}
+		\item Close to code they refer to
+		\item If updating the code, \\ update the comments
+		\item Avoid if unnecessary
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}[t,fragile]{Documentation: internal: comments}
+
+	\begin{block}{What is ``unnecessary''}
+		What feels obvious to you when writing the code may not be
+		obvious to someone else, or even to you at a future time.
+	\end{block}
+
+	\begin{block}{A MATLAB example}
+\begin{verbatim}
+%   ** USELESS COMMENT **
+% compute the mean value of every column of A
+B = mean(A,1);
+
+%   ** USEFUL, bsxfun may be obscure! **
+% divide every column of A by the column vector v
+B = bsxfun(@rdivide,A,v);
+\end{verbatim}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}[t]{Documentation: internal: comments}
+	\Large
+	\begin{block}{When commenting...}
+		\begin{itemize}
+			\item ...a library, say \textbf{what} it does \\
+				\begin{quotation}
+					This toolbox computes PSDs.
+				\end{quotation}
+			\item ...a function, say \textbf{how} it does it \\
+				\begin{quotation}
+					PSD estimate using Welch's method.
+				\end{quotation}
+			\item ...a line, say \textbf{why} it does it that way \\
+				\begin{quotation}
+					\% bsxfun is faster than a for loop
+				\end{quotation}
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Documentation: internal: self-documenting code}
+
+	\large
+	\begin{quotation}
+		Programs must be written for people to read, \\ and only
+		incidentally for machines to execute.
+		\begin{flushright}
+			--- Structure and interpretation of computer programs
+		\end{flushright}
+	\end{quotation}
+
+	\\~\\
+
+	\begin{itemize}
+	      \item Aim at writing code that does not need comments
+	      \item Use meaningful, non-ambiguous variable names
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Documentation: external}
+
+	Quality internal documentation can be used to automatically
+	generate external documentation.
+
+	\begin{block}{A MATLAB example}
 		\begin{description}
-			\item[File] What it does ? Bib. references ?
-			\item[Function] How is the task done ? How to use it ?
-			\item[Lines] Why is this operation done this way ?
+			\item[publish()] code publishing tool included in MATLAB
 		\end{description}
 	\end{block}
 
-	\pause
-	\medskip
-
-	\begin{block}{Pro-tip}
-		\begin{center}
-			Start every single code file with a comment
-		\end{center}
+	\begin{block}{More useful tools}
+		\begin{itemize}
+			\item \textbf{Doxygen} doc-generator supporting multiple languages
+			\item \textbf{Sphinx} doc-generator for the Python project
+			\item \textbf{readthedocs.org} web-service for hosting documentation
+		  \end{itemize}
 	\end{block}
 
-\end{frame}
-
-\begin{frame}{Documentation: Variables naming matters} % {{{
-
-	\begin{quotation}
-		\noindent A computer program is just another way to express an idea.
-	\end{quotation}
-
-	... and you have plenty of space to do so !
-
-	\pause
-	\medskip
-
-	Choose clear \& meaningful names for variables and functions  (avoid \texttt{tmp}, \texttt{data}, \texttt{this},
-	\texttt{process\_data()}, \texttt{a-z} (except in loops) , \texttt{id}, \textit{etc.})
-
-	\pause
-	\medskip
-
-	\begin{block}{Conventions}
-		Formalized naming conventions exists (and some also address code styling issues, see
-		PEP8 for example).
-
-		Use them as much as you can!
-	\end{block}
-
-\end{frame}
-
-\begin{frame}{Documentation: re-generated}
-
-	\begin{quotation}
-		When a task is repetitive... build a machine to do it.
-	\end{quotation}
-
-	Documenting is boring but it's always the same !
-
-	Tools exist to automate doc generation :
-
-	\begin{description}
-		\item[Doxygen] Doc-generator for C/C++/Java \& others
-		\item[Sphinx] Doc-oriented static site generator build for the Python project (docutils) with EPUB, PDF, \LaTeX{} capabilities
-		\item[publish()] HTML/PDF publishing tool included in MATLAB
-		\item[\textit{etc.}]
-	\end{description}
-
-	It's easy to publish it too : see \textbf{readthedocs.org}
 \end{frame}
 
 %% Mat kicks in
@@ -745,9 +817,10 @@
 
 
 \begin{frame}[standout] % Thank you {{{1
-	Thank you!\\
+	% Thank you!\\
 	\vspace{0.05\textwidth}
-	Questions?\\
+	% It really looks like the BSOD, lol
+	\colorbox{white}{\textcolor{KTHBlue}{Questions?}}\\
 	\vspace{0.25\textwidth}
 	\scriptsize{\texttt{manzari@kth.se}} --- \scriptsize{\texttt{gaborit@kth.se}}\\
 \end{frame}
