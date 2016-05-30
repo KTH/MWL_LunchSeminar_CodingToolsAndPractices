@@ -643,11 +643,11 @@
 	\large
 	Before using a program, it's good to know:
 
-	\begin{description}
-		\item [what] it does
-		\item [how] it does it
-		\item [why] it does it like that
-	\end{description}
+	\begin{itemize}
+		\item \textbf{what} it does
+		\item \textbf{how} it does it
+		\item \textbf{why} it does it like that
+	\end{itemize}
 
 	\bigskip
 
@@ -743,18 +743,18 @@ B = bsxfun(@rdivide,A,v);
 	\large
 	\begin{block}{When commenting...}
 		\begin{itemize}
-			\item ...a library, say \textbf{what} it does \\
-				\begin{quotation}
-					This toolbox computes PSDs.
-				\end{quotation}
-			\item ...a function, say \textbf{how} it does it \\
-				\begin{quotation}
-					PSD estimate using Welch's method.
-				\end{quotation}
-			\item ...a line, say \textbf{why} it does it that way \\
-				\begin{quotation}
-					\% bsxfun is faster than a for loop
-				\end{quotation}
+			\item ...a library, say \alert{\textbf{what}} it does
+\begin{verbatim}
+% This toolbox computes PSDs.
+\end{verbatim}
+			\item ...a function, say \alert{\textbf{how}} it does it
+\begin{verbatim}
+% PSD estimate using Welch's method.
+\end{verbatim}
+			\item ...a line, say \alert{\textbf{why}} it does it that way
+\begin{verbatim}
+\% bsxfun is faster than a for loop
+\end{verbatim}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -791,11 +791,11 @@ B = bsxfun(@rdivide,A,v);
 	\end{block}
 
 	\begin{block}{More useful tools}
-		\begin{itemize}
-			\item \textbf{Doxygen} doc-generator supporting multiple languages
-			\item \textbf{Sphinx} doc-generator for the Python project
-			\item \textbf{readthedocs.org} web-service for hosting documentation
-		\end{itemize}
+		\begin{description}
+			\item[Doxygen] doc-generator supporting multiple languages
+			\item[Sphinx] doc-generator built for the Python project
+			\item[rtfd.org] free web-service for hosting documentation
+		\end{description}
 	\end{block}
 
 \end{frame}
